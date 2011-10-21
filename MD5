@@ -1,0 +1,16 @@
+61948b613954be8f4ad25d9607a31cb8 *DESCRIPTION
+e86dd87b68c3a0dfa446d27e4108ea9c *R/aspect_ratio_plot.R
+35d698c121964514927292dbe97cd7da *R/init_fig_dimen.R
+d453463f8a9fcc39887b12c2142fe9f7 *R/plot3d_points.R
+38838233476925e26bb1358d97cc47ab *R/ragged_image.R
+30136b2a86d864f4f25f70e0e2ea6def *R/vertical_image_legend.R
+7ca789c1d78b83e3153a9c567bade8d6 *data/ozone1.csv.gz
+ef248b35946ef530c4981e4e97696667 *data/ozone2.csv.gz
+a2f6dfd2a4d2af1ae53fd7c56d68c798 *man/aqfig-package.Rd
+7d25658249803c9dddae03bad548ae3c *man/aspect.ratio.plot.Rd
+fdb0cf0f7197c78e08b85839857724c6 *man/init.fig.dimen.Rd
+3ebc9b75e51dd7f96ea9b018e73cb059 *man/ozone1.Rd
+849062504a55478f08c7aa13ecab9375 *man/ozone2.Rd
+618ccb7cb3af37ed2214e642cd0cf2f9 *man/plot3d.points.Rd
+8e0f2bd24e31d30a1b5eaccfcda2f76f *man/ragged.image.Rd
+50578863338b45a59eb936628de2a4fc *man/vertical.image.legend.Rd
