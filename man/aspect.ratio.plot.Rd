@@ -7,23 +7,22 @@
 }
 
 
-\description{
-  This code allows the user to make/initialize a plot with a proper
-aspect ratio and of a specified width/height.  (Note that this size
-includes the actual plot and the margins around it.)  The function has
-default specifications for the margins, intended to minimize the margin
-space for many commonly generated plots, but these can be changed. of a
-specified size. The user should not use this function if more than one
-plot is desired on the device (e.g., if using mfrow, mfcol, layout,
-etc.)  It may be used to generate plots in encapsulated PostScript, PDF,
-Windows metafile, and TIFF formats.
-}
+\description{ This code allows the user to make/initialize a figure with
+a proper aspect ratio and of a specified width/height.  (Note that this
+size includes the actual plot and the margins around it.)  The function
+has default specifications for the margins, intended to minimize the
+margin space for many commonly generated plots, but these can be
+changed.  The user should not use this function if more than one plot is
+desired on the device (e.g., if using mfrow, mfcol, layout, etc.)  It
+may be used to generate plots in encapsulated PostScript, PDF, Windows
+metafile, and TIFF formats.  }
 
 
 \usage{
-aspect.ratio.plot(x, y, file, dev = "pdf", type = "p", xlim,
-   ylim, width, height, mai = c(0.6, 0.6, 0.1, 0.1),
-   mgp = c(1.8, 0.5, 0), ...)
+aspect.ratio.plot(x, y, file, dev = "pdf", type = "p", xlim, ylim,
+   width, height, mai = c(0.4, 0.4, 0.1, 0.1), mgp = c(1.4, 0.3, 0),
+   tcl=-0.3, cex=0.8, cex.axis=0.8, cex.lab=0.8, cex.main=0.8,
+   cex.sub=0.8,...)
 }
 
 
@@ -62,10 +61,25 @@ aspect.ratio.plot(x, y, file, dev = "pdf", type = "p", xlim,
   \item{mgp}{Settings determining how close axis titles, labels, and
     lines are to the plot, as defined for parameter \code{mgp} in the
     help for the \code{\link{par}} function.}
-
-  \item{\dots}{Any other parameters the user adds will be passed to the
-    \code{\link{plot}} function, and may include options for color and
-    type (\dQuote{l} for lines, etc.), among many others.}
+  \item{tcl}{Tick mark length, as explained in the help for the
+    \code{\link{par}} function.  By default, the value is -0.3, to
+    better match the default size of plots produced by this function.
+    }
+  \item{cex, cex.axis, cex.lab, cex.main, cex.sub}{Amount of
+    magnification for plotting text, symbols, axis annotation, titles,
+    etc., as explained in the help for \code{\link{par}} function.
+    Default for each of these is 0.8, to better match the default size
+    of plots produced by this function.}
+  
+  \item{\dots}{Any other parameters the user adds will be passed to
+    either the \code{\link{init.fig.dimen}} function (and thence to
+    \code{\link{par}}) or to the \code{\link{plot}} function.  Please
+    note that some such arguments could legitimately be passed to either
+    of these two functions, but we assumes that any of these which are
+    valid arguments to \code{\link{par}} are intended to be passed to
+    \code{\link{init.fig.dimen}}, which initializes the figure on the
+    given device.  All other arguments will be assumed to be valid
+    arguments for \code{\link{plot}} and will be passed as such.}
 
 }
 

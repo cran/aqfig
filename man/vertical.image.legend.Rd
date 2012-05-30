@@ -23,30 +23,30 @@ vertical.image.legend(zlim, col)
 }
 
 
-\details{This function makes two important assumptions.  The first is
-  that the user has already finished making the main portion of the
-  plot; i.e., user should \strong{add the legend last}.  The user should
-  not try to add secondary information onto the plot after using this
-  legend command.  This is because this funciton alters the
-  \code{\link{par}} settings to draw the legend, and trying to reset
-  them sometimes causes errors that are mysterious (at least to the
-  writer of this function).  Secondly, this function works best when
-  there is only one plot on the device, in which case the margin space
-  is straightforward (no confusion between \code{oma}/\code{omi} and
-  \code{mar}/\code{mai}, etc.}
+\details{This function works best when there is only one plot on the
+  device, in which case the margin space is straightforward (no
+  confusion between \code{oma}/\code{omi} and \code{mar}/\code{mai},
+  etc.  Originially, this function also assumed that the user had
+  already finished making the main portion of the plot before adding the
+  legend; i.e., the user should \strong{add the legend last}.  While the
+  author believes that this issue has been resolved, the author
+  recommends that the user avoid changing the main plot after using this
+  legend command.  This function alters the \code{\link{par}} settings
+  to draw the legend, and trying to reset them properly is not
+  straightforward.}
 
 \value{Puts vertical color bar legend to the right of the plot.}
 
 
 \author{Jenise Swall}
 
-\note{ As noted in the help for \code{\link[fields]{image.plot}} in the
+\note{As noted in the help for \code{\link[fields]{image.plot}} in the
   fields package, putting a legend on a plot is harder than it might
   seem.  The user may have to experiment with this function a bit to get
   it to work well for a specific application.  The user may also want to
   try the previously mentioned \code{\link[fields]{image.plot}} function
-  in the fields package (to just add the legend, use
-  \dQuote{legend.only=TRUE}).}
+  in the fields package.  (To just add the legend using
+  \code{\link[fields]{image.plot}}, use \dQuote{legend.only=TRUE}.)}
 
 
 \seealso{\code{\link[fields]{image.plot}}}

@@ -52,8 +52,8 @@ init.fig.dimen(file, dev = "pdf", width, height,
 \value{Sets up a figure and plotting region with the specified
   dimensions and margins on the device \code{dev}.}
 
-\note{This function is called by the functin aspect.ratio.plot (also
-  included in this package).}
+\note{This function is called by the function
+  \code{\link{aspect.ratio.plot}} (also included in this package).}
 
 \author{Jenise Swall}
 

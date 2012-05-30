@@ -58,6 +58,10 @@
 ## REVISION HISTORY:
 ##   Prototype: Jenise Swall, 2011-02-28  (Based on code taken from
 ##      an older version of Jenise's aspect.plot.ratio function.)
+##
+##   2012-05-30 (JLS): Replaced argument "file=file" in call to
+##   win.metafile() with "filename=file" to avoid warnings about
+##   partial argument match.
 ## ###########################################################
 init.fig.dimen <- function(file, dev="pdf", width, height,
                               mai=c(0.6, 0.6, 0.1, 0.1),
@@ -94,7 +98,7 @@ init.fig.dimen <- function(file, dev="pdf", width, height,
   else if (dev=="wmf"){
     if (.Platform$OS.type != "windows")
       stop("Cannot use argument ", dQuote(dev), " on a non-Windows platform.")
-    win.metafile(file=file, width=width, height=height)
+    win.metafile(filename=file, width=width, height=height)
   }
   else if (dev=="tif")
     tiff(filename=file, width=width, height=height, units="in",

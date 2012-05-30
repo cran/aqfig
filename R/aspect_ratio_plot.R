@@ -1,10 +1,10 @@
 ## ###########################################################
-## Purpose: This code allows the user to make/initialize a plot with
+## Purpose: This code allows the user to make/initialize a figure with
 ##    a proper aspect ratio and of a specified width/height.  (Note 
 ##    that this size includes the actual plot and the margins around
 ##    it.)  The function has default specifications for the margins,
 ##    intended to minimize the margin space for many commonly
-##    generated plots, but these can be changed. of a specified size.
+##    generated plots, but these can be changed. 
 ##    The user should not use this function if more than one plot is
 ##    desired on the device (e.g., if using mfrow, mfcol, layout,
 ##    etc.)  It may be used to generate plots in encapsulated
@@ -41,6 +41,15 @@
 ##    mgp: Settings determining how close axis titles, labels, and
 ##       lines are to the plot, as defined for parameter 'mgp' in
 ##       the help for the par() function.
+##    tcl: Tick mark length, as explained in the help for the par()
+##       function.  By default, the value is -0.3 to better match the
+##       size of the default plot produced by this function.
+##    cex, cex.axis, cex.lab, cex.main, cex.sub: Adjust sizes of
+##       plotting symbols, axis annotation, titles, etc.  (See further
+##       descriptions in the help for function par().)  By default,
+##       these are all assigned value 0.8 to better match the size of
+##       the default plot produced with this function, which has a width of
+##       3.5 inches.
 ##    ...: Any other parameters the user adds will be passed to the
 ##       plot() function, and may include options for color and
 ##       type ("l" for lines, etc.), among many others.
@@ -64,21 +73,37 @@
 ##      function initialize.aspect.plot(), now deprecated).
 ##
 ##   2010-04-12 (JLS): Type added as option, problem with xlim, ylim fixed.
+##
 ##   2010-04-15 (JLS): Option mgp added.
+##
 ##   2010-06-16 (JLS): Option to make TIFF files with resolution of 300
 ##      dpi added.  Originally intended to allow user to pass in dpi as 
 ##      an argument, but encountered as yet unexplained problems with the
 ##      format.  (For example, an image that could be produced at 300 and
 ##      600 dpi encountered an error when set at 450 dpi.)
+##
 ##   2011-02-28 (JLS): Altered code to use a call to function
 ##      init.fig.dimen() to open the device and make the call to par().
 ##      Changed function arguments 'fig.height' and 'fig.width' to
 ##      'height' and 'width', respectively.  Adjusted/clarified comments.
+##
+##   2012-05-21 (JLS): By default, we assume a figure width of 3.5
+##      inches, which is approximately the width of a single column in a
+##      journal with double-column formatting.  We adjust the default
+##      size of text, tick marks, symbols, etc. to be reasonable for
+##      figures of this width and similar height.  The user can change
+##      these defaults to match his/her application.
+##      We also check the extra arguments the user passes in (as "...").
+##      Any of these parameters which are valid arguments to par() will
+##      be passed on to init.fig.dimen(), and from there to par().  All
+##      other arguments will be assumed to be valid arguments for plot()
+##      and will be passed as such.
 ## ###########################################################
-aspect.ratio.plot <- function(x, y, file, dev="pdf", type="p",
-                              xlim, ylim, width, height,
-                              mai=c(0.6, 0.6, 0.1, 0.1),
-                              mgp=c(1.8, 0.5, 0), ...){
+aspect.ratio.plot <- function(x, y, file, dev="pdf", type="p", xlim, ylim,
+                              width, height, mai=c(0.4, 0.4, 0.1, 0.1),
+                              mgp=c(1.4, 0.3, 0), tcl=-0.3, cex=0.8,
+                              cex.axis=0.8, cex.lab=0.8, cex.main=0.8,
+                              cex.sub=0.8, ...){
 
   ## If xlim and x are missing, we have no info about the x-axis.
   if ( missing(xlim) && missing(x) )
@@ -112,9 +137,9 @@ aspect.ratio.plot <- function(x, y, file, dev="pdf", type="p",
   ## should set it based on the idea of preserving the aspect ratio.
   if ( missing(height) || missing(width) ){
 
-    ## If both height and width are missing, then set width to 4in.
+    ## If both height and width are missing, then set width to 3.5in.
     if( missing(height) && missing(width) )
-      width <- 4.0
+      width <- 3.5
 
 
     ## What are the relative proportions of the x and y ranges?
@@ -163,14 +188,44 @@ aspect.ratio.plot <- function(x, y, file, dev="pdf", type="p",
     warning("Using provided 'height' and 'width' without checking aspect ratio.")
 
 
-  ## Initialize figure and margins on specified device.
-  init.fig.dimen(file=file, dev=dev, width=width, height=height,
-                 mai=mai, mgp=mgp)
+  
+  ## Need to figure out which of the "extra" arguments (meaning those
+  ## in the "..." pairlist), should be passed to init.fig.dimen() for
+  ## figure initialization (this function uses a customized call to
+  ## par()) and which are used by plot().
+  
+  ## Look at the arguments in the "..." pairlist.  If these are
+  ## possible arguments to par(), we pass them to init.fig.dimen(),
+  ## which uses them in a call to par().  Get the list of par()
+  ## arguments from graphics:::.Pars, as explained in the "Details"
+  ## section of the par() help page.
+  possible.par.args <- graphics:::.Pars
+  extra.args.passed.in <- match.call(expand.dots= FALSE)$...
+  extra.args.to.par <- extra.args.passed.in[names(extra.args.passed.in) %in% possible.par.args]
+  
+  ## Identify arguments that are not valid arguments to par(); they are
+  ## passed to plot() later in this function.
+  extra.args.to.plot <- extra.args.passed.in[!(names(extra.args.passed.in) %in% possible.par.args)]
 
-
-  ## Initialize/make plot.
-  if (type == "n")
-    plot(xlim, ylim, type=type, xlim=xlim, ylim=ylim, ...)
-  else
-    plot(x, y, type=type, xlim=xlim, ylim=ylim, ...)
+  ## Build a call to init.fig.dimen(), including the specific
+  ## arguments that we know are needed, plus any extra arguments from
+  ## the "..." pairlist.
+  specific.args <- list(file=file, dev=dev, width=width, height=height,
+                        mai=mai, mgp=mgp, tcl=tcl, cex=cex,
+                        cex.axis=cex.axis, cex.lab=cex.lab, cex.main=cex.main,
+                        cex.sub=cex.sub)
+  eval(as.call(c(init.fig.dimen, specific.args, extra.args.to.par)))
+  
+  ## Build a call to form a plotting region (if type="n") or make a
+  ## plot.  This includes the specific arguments that we know are
+  ## needed, plus any extra arguments from the "..." pairlist which
+  ## were not valid arguments to par().
+  if (type == "n"){
+    specific.args <- list(x=xlim, y=ylim, type=type, xlim=xlim, ylim=ylim)
+    eval(as.call(c(plot, specific.args, extra.args.to.plot)))
+  }
+  else{
+    specific.args <- list(x, y, type=type, xlim=xlim, ylim=ylim)
+    eval(as.call(c(plot, specific.args, extra.args.to.plot)))
+  }
 }

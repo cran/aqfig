@@ -13,14 +13,16 @@
 ## RESULT: Puts vertical color bar legend to the right of the plot.
 ##
 ## ASSUMES:
-##    1. User has already finished making the main portion of the plot;
-##       i.e., user should ADD THE LEGEND LAST.  The user should not
-##       try to add secondary information onto the plot after using
-##       this legend command, because it won't work.  This is because
-##       this funciton alters the par() settings to draw the legend,
-##       and trying to reset them sometimes causes errors that are
-##       mysterious (at least to the writer of this function).
-##    2. Works best when there is only one plot on the device.
+##    1. Originally, this function assumed that the user had already
+##       finished making the main portion of the plot; i.e., it
+##       required that the user should ADD THE LEGEND LAST.  While the
+##       author believes this issue has been fixed, the author still
+##       recommends that the user avoid changing the main plot after
+##       using this legend command.  This function alters the par()
+##       settings to draw the legend, and trying to reset them
+##       properly is not straightforward.
+##    2. This function works best when there is only one plot on the
+##       device.
 ##
 ## 
 ## NOTES:  As noted in the help for image.plot() in the "fields"
@@ -39,13 +41,17 @@
 ##      entered the function.  This was causing sporadic errors that
 ##      are as yet unexplained (at least to the writer of this function).
 ##   2011-03-01 (JLS): Altered/clarifed comments.
+##   2012-05-20 (JLS): Altered function so that, when exiting, we
+##      reset par settings so that changes can still be made to the
+##      main plot (not the legend).  These changes were closely based
+##      on code from image.plot() in the "fields" package.
 ## ###########################################################
 vertical.image.legend <- function(zlim, col){
 
 
   ## Get the current par information.  We restore these settings
   ## before we leave this function.
-  ## starting.par.settings <- par(no.readonly=TRUE)
+  starting.par.settings <- par(no.readonly=TRUE)
 
 
   ## Find information about the overall size of the figure and the
@@ -83,6 +89,10 @@ vertical.image.legend <- function(zlim, col){
   box()
 
 
-  ## Return par settings to what they were when we entered this function.
-  ## par(starting.par.settings)
+  ## Return par settings to what they were when we entered this
+  ## function.  This is closely based on what is done in at the end
+  ## of the image.plot() function in the "fields" package.
+  mfg.settings <- par()$mfg
+  par(starting.par.settings)
+  par(mfg=mfg.settings, new=FALSE)
 }

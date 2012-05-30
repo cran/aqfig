@@ -2,8 +2,8 @@ Package: aqfig
 Type: Package
 Title: Functions to help display air quality model output and
         monitoring data
-Version: 0.2
-Date: 2011-10-21
+Version: 0.3
+Date: 2012-05-30
 Author: Jenise Swall <jswall@vcu.edu>
 Maintainer: Jenise Swall <jswall@vcu.edu>
 Depends: geoR
@@ -14,6 +14,6 @@ Description: This package contains functions to help display air
         legends.
 License: Unlimited
 LazyLoad: yes
-Packaged: 2011-10-21 20:08:15 UTC; jenise
+Packaged: 2012-05-30 19:36:32 UTC; jenise
 Repository: CRAN
-Date/Publication: 2011-10-23 10:08:40
+Date/Publication: 2012-05-31 10:17:52
