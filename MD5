@@ -1,4 +1,4 @@
-800fe7769544a48ed84401599443aed1 *DESCRIPTION
+252fc8ad58d0ae8e290a200a77af1c9b *DESCRIPTION
 da15723164421fe531e22c7fdfcbd9aa *NAMESPACE
 d3dabcbe0c57b310a336637228e40933 *R/aspect_ratio_plot.R
 82a41accda339e1d07fac23a241862dc *R/init_fig_dimen.R
@@ -6,7 +6,7 @@ d3dabcbe0c57b310a336637228e40933 *R/aspect_ratio_plot.R
 d453463f8a9fcc39887b12c2142fe9f7 *R/plot3d_points.R
 38838233476925e26bb1358d97cc47ab *R/ragged_image.R
 c53435d66a058d197af49a3f0b51a3d3 *R/scatterplot_density.R
-4d309cf1b2b76014df5936fe3066192d *R/vertical_image_legend.R
+c5ebad63615208505f6dfbf939ddcb86 *R/vertical_image_legend.R
 7ca789c1d78b83e3153a9c567bade8d6 *data/ozone1.csv.gz
 ef248b35946ef530c4981e4e97696667 *data/ozone2.csv.gz
 a2f6dfd2a4d2af1ae53fd7c56d68c798 *man/aqfig-package.Rd
@@ -15,7 +15,7 @@ d35af67620c4149a14cce3529f0882a1 *man/init.fig.dimen.Rd
 6242f22ae2fd772f327c8a2a156e15f4 *man/kristen.colors.Rd
 3ebc9b75e51dd7f96ea9b018e73cb059 *man/ozone1.Rd
 849062504a55478f08c7aa13ecab9375 *man/ozone2.Rd
-618ccb7cb3af37ed2214e642cd0cf2f9 *man/plot3d.points.Rd
+5ce61ddb1be7c4c49dd9e9c0afb88cdf *man/plot3d.points.Rd
 8e0f2bd24e31d30a1b5eaccfcda2f76f *man/ragged.image.Rd
 c2a2aa725ddc4c264f97e72bc4da5229 *man/scatterplot.density.Rd
-12db6e0dd0383357b17242466404d2a0 *man/vertical.image.legend.Rd
+2962a240d33704487a777a4b78c6e0dc *man/vertical.image.legend.Rd

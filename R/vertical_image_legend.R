@@ -45,6 +45,10 @@
 ##      reset par settings so that changes can still be made to the
 ##      main plot (not the legend).  These changes were closely based
 ##      on code from image.plot() in the "fields" package.
+##   2013-01-11 (JLS): Fixed bug in determining the cut/endpoints to
+##      go with each color.  Previously, the zlim bounds were shown as
+##      though they were the midpoints of the range for their color,
+##      rather than the endpoints.
 ## ###########################################################
 vertical.image.legend <- function(zlim, col){
 
@@ -77,9 +81,15 @@ vertical.image.legend <- function(zlim, col){
   y.legend.plt <- y.legend.fig
   
 
-  ## Colors to plot in the color bar.
-  z <- seq(zlim[1], zlim[2], length=length(col))
-
+  ## Find cut/endpoints.  The lower zlim is the bottom endpoint; the
+  ## upper zlim element is the lower endpoint.  Then, there are
+  ## length(col)-1 cutpoints between these to get length(col)
+  ## intervals.
+  cut.pts <- seq(zlim[1], zlim[2], length=length(col)+1)
+  ## Find the midpoint for each interval.  These are the values that
+  ## will cause each color to be plotted in the color bar.
+  z <- ( cut.pts[1:length(col)] + cut.pts[2:(length(col)+1)] ) / 2
+  
 
   par( new=TRUE, pty="m", plt=c(x.legend.plt, y.legend.plt) )
   ## par( new=T, xpd=T, pty="m", plt=c(x.legend.plt, y.legend.plt) )

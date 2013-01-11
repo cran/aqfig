@@ -101,24 +101,25 @@ plot3d.points(x, y, z, zlim = range(z, na.rm = TRUE),
 ## and differently-sized points.  Add a legend using function
 ## vertical.image.legend (included in this package).
 data(ozone1)
-col.rng <- rev(rainbow(n=12, start=0, end=4/6))
+col.rng <- rev(rainbow(n=10, start=0, end=4/6))
+z.rng <- c(40, 90)
 plot3d.points(x=ozone1$longitude, y=ozone1$latitude, z=ozone1$daily.max,
               xlab="longitude", ylab="latitude", col=col.rng,
-              cex.min=0.5, cex.max=1.5)
+              zlim=z.rng, cex.min=0.5, cex.max=1.5)
 ## To verify, label the points with their concentrations.
 text(ozone1$longitude, ozone1$latitude+0.15, ozone1$daily.max, cex=0.7)
 ## If maps package is available, put on state lines.
 if (require("maps"))  map("state", add=TRUE, col="lightgray")
 ## Put on legend.
-vertical.image.legend(col=col.rng, zlim=range(ozone1$daily.max))
+vertical.image.legend(col=col.rng, zlim=z.rng)
 
 
 ## Plot second day of ozone data.  Note that day 2 experienced a smaller
 ## range of concentrations, so we plot day 2 on same scale as day 1.
 data(ozone1)
 data(ozone2)
-z.rng <- range(ozone1$daily.max)
-col.rng <- rev(rainbow(n=12, start=0, end=4/6))
+z.rng <- c(40, 90)
+col.rng <- rev(rainbow(n=10, start=0, end=4/6))
 X11()
 plot3d.points(x=ozone2$longitude, y=ozone2$latitude, z=ozone2$daily.max,
               xlab="longitude", ylab="latitude", col=col.rng,
