@@ -9,13 +9,11 @@
 
 \description{This package contains several functions to help users draw
   figures to display air pollution measurements and air quality model
-  output.  These include functions to generate figures with appropriate
-  dimensions and aspect ratio, to place a legend to the right of a plot,
-  to draw a scatterplot with the points' colors or sizes reflecting the
-  value of a response variable.}
+  output.  These include functions to place a color legend to the right
+  of a plot, to draw a scatterplot with the points' colors or sizes
+  reflecting the value of a response variable, etc.}
 
-\note{This software program has been reviewed in accordance with
-  U.S. Environmental Protection Agency policy and approved for
-  publication.  Mention of trade names or commercial products does not
-  constitute endorsement or recommendation for use.
-}
+\note{Note that two functions which were previously part of this
+  package, init.fig.dimen() and aspect.plot.ratio() have been moved to
+  the "figdim" package, which is available from
+  \url{http://www.people.vcu.edu/~jswall/figdim_index.html}.}

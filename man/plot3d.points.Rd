@@ -120,7 +120,7 @@ data(ozone1)
 data(ozone2)
 z.rng <- c(40, 90)
 col.rng <- rev(rainbow(n=10, start=0, end=4/6))
-X11()
+dev.new()
 plot3d.points(x=ozone2$longitude, y=ozone2$latitude, z=ozone2$daily.max,
               xlab="longitude", ylab="latitude", col=col.rng,
               zlim=z.rng, cex.min=0.5, cex.max=1.5)
@@ -139,7 +139,7 @@ vertical.image.legend(col=col.rng, zlim=z.rng)
 x <- 1:9
 y <- 1:9
 z <- c(0, 47:53, 100)
-X11()
+dev.new()
 par(mfrow=c(1,3))
 col.rng <- rev(rainbow(n=7, start=0, end=4/6))
 plot3d.points(x, y, z, col=col.rng)

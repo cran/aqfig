@@ -105,7 +105,7 @@ ragged.image(x=x[1:4], y=y[1:4], z=z[1:4], zlim=range(z), col=col.rng,
 x <- c(1, 2, 3, 1, 3, 2, 3, 1, 3)
 y <- c(4, 4, 4, 3, 3, 2, 2, 1, 1)
 z <- c(0, 47:53, 100)
-X11()
+dev.new()
 par(mfrow=c(1,3))
 col.rng <- rev(rainbow(n=7, start=0, end=4/6))
 ragged.image(x, y, z, col=col.rng)
