@@ -10,7 +10,7 @@
   August 10, 2004.  }
 
 
-\usage{ozone}
+\usage{ozone2}
 
 \format{A file in CSV format containing 23 records.}
 

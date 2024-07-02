@@ -26,46 +26,39 @@ vertical.image.legend(zlim, col)
 \details{This function works best when there is only one plot on the
   device, in which case the margin space is straightforward (no
   confusion between \code{oma}/\code{omi} and \code{mar}/\code{mai},
-  etc.  Originially, this function also assumed that the user had
-  already finished making the main portion of the plot before adding the
-  legend; i.e., the user should \strong{add the legend last}.  While the
-  author believes that this issue has been resolved, the author
-  recommends that the user avoid changing the main plot after using this
-  legend command.  This function alters the \code{\link{par}} settings
-  to draw the legend, and trying to reset them properly is not
-  straightforward.}
+  etc.  The user should finish making the main portion of the plot before adding
+  the legend; i.e., the user should \strong{add the legend last}.  This function
+  alters the \code{\link{par}} settings to draw the legend.  Upon exit, it
+  resets them back to what they were before the function call.}
 
 \value{Puts vertical color bar legend to the right of the plot.}
 
 
 \author{Jenise Swall}
 
-\note{As noted in the help for \code{\link[fields]{image.plot}} in the
-  fields package, putting a legend on a plot is harder than it might
-  seem.  The user may have to experiment with this function a bit to get
-  it to work well for a specific application.  The user may also want to
-  try the previously mentioned \code{\link[fields]{image.plot}} function
-  in the fields package.  (To just add the legend using
-  \code{\link[fields]{image.plot}}, use \dQuote{legend.only=TRUE}.)}
+\note{Putting a legend on a plot is harder than it might seem.  The user may
+  have to experiment with this function a bit to get it to work well for a
+  specific application.  The user may also want to try the
+  \code{\link[fields]{imagePlot}} function in the fields package.}
 
 
 \seealso{\code{\link[fields]{image.plot}}}
 
 \examples{
-## Plot ozone at each location using colors from rainbow.colors
-## and differently-sized points.  Add a legend using function
-## vertical.image.legend (included in this package).
+# Plot ozone at each location using colors from rainbow.colors
+# and differently-sized points.  Add a legend using function
+# vertical.image.legend (included in this package).
 data(ozone1)
 col.rng <- rev(rainbow(n=10, start=0, end=4/6))
 z.rng <- c(40, 90)
 plot3d.points(x=ozone1$longitude, y=ozone1$latitude, z=ozone1$daily.max,
               xlab="longitude", ylab="latitude", zlim=z.rng, col=col.rng,
               cex.min=0.5, cex.max=1.5)
-## To verify, label the points with their concentrations.
+# To verify, label the points with their concentrations.
 text(ozone1$longitude, ozone1$latitude+0.15, ozone1$daily.max, cex=0.7)
-## If maps package is available, put on state lines.
+# If maps package is available, put on state lines.
 if (require("maps"))  map("state", add=TRUE, col="lightgray")
-## Put on legend.
+# Put on legend.
 vertical.image.legend(col=col.rng, zlim=z.rng)
 }
 
